@@ -1,0 +1,33 @@
+.favs-container {
+  margin-top: 7vmax;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.favs-container > div {
+  width: 100%;
+}
+.favs-container > div > h1 {
+  font-size: 2vmax;
+  padding: 2vmax;
+  color: crimson;
+}
+.favs-container > h1 {
+  font-size: 2vmax;
+  padding: 2vmax;
+  position: absolute;
+  top: 5vmax;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.favs-container > div:first-child {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+}

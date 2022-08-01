@@ -1,0 +1,130 @@
+.log-out-btn-block {
+  margin-top: 7vmax;
+  margin-bottom: 1vmax;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  width: 95%;
+}
+.log-out-btn-block > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2vmax;
+  padding: 0.5vmax 1vmax;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.log-out-btn-block > button:hover {
+  background-color: crimson;
+}
+
+.Profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.user-img-container {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 4vmax;
+  position: relative;
+}
+.user-img-container > img {
+  padding: 3vmax;
+  width: 60%;
+  height: 25vmax;
+  object-fit: contain;
+  border: 1px solid #000;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  background-color: white;
+  border-radius: 10%;
+  transition: 0.2s all ease;
+}
+.user-img-container > img:hover {
+  transform: scale(1.05);
+}
+.profile-edit-btn {
+  background-color: rgb(255, 255, 255);
+  padding: 1vmax;
+  font-size: 3vmax;
+  border-radius: 100%;
+  position: absolute;
+  /* bottom: 70px; */
+  bottom: -12px;
+  right: -12px;
+  border: 2px solid grey;
+  transition: 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.profile-edit-btn:hover {
+  background-color: crimson;
+}
+
+.user-info-container {
+  width: 50%;
+  padding: 3vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  margin-top: 1vmax;
+}
+.user-info-container > h1 {
+  font-size: 3vmax;
+}
+.user-info-container > p {
+  font-size: 1.1vmax;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.user-info-container > p > span {
+  font-size: 1.3vmax;
+}
+.user-main-info-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5vmax;
+  width: 80%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.user-main-info-head > div,
+.user-main-info-head > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s all ease;
+  padding: 1vmax;
+  width: 50%;
+  cursor: pointer;
+}
+.user-main-info-head > div:first-child {
+  border-radius: 10px 0 0 10px;
+}
+.user-main-info-head > a:last-child {
+  border-radius: 0 10px 10px 0;
+}
+.user-main-info-head > div:hover,
+.user-main-info-head > a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  color: crimson;
+}
+.user-main-info-head > div > h1,
+.user-main-info-head > a > h1 {
+  font-size: 1.5vmax;
+  margin-bottom: 0.5vmax;
+}

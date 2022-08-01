@@ -1,0 +1,10 @@
+.UpdateProfile {
+  margin-top: 10vmax;
+}
+.myform-heading {
+  font-size: 1.6vmax;
+  color: crimson;
+  /* padding: 1vmax; */
+  padding-top: 1vmax;
+  border-bottom: 1px solid black;
+}
