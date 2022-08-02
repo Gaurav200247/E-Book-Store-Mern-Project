@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Cart.css";
 import BagItemCard from "./BagItemCard.jsx";
 

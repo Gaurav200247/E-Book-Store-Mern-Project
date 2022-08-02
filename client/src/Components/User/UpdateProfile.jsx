@@ -36,7 +36,7 @@ const UpdateProfile = () => {
 
       dispatch({ type: "UpdateProfileReset" });
     }
-  }, [isUpdated, dispatch, toast, navigate, , error]);
+  }, [isUpdated, dispatch, navigate, error]);
 
   return (
     <div className="LoginRegisterForm">

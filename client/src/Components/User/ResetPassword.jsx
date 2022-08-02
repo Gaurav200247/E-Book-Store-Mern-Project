@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import LockIcon from "@mui/icons-material/Lock";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import KeyIcon from "@mui/icons-material/Key";
 import { Field, Form, Formik } from "formik";
@@ -14,9 +13,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
 
-  const { loading, error, message, success } = useSelector(
-    (state) => state.forgotPass
-  );
+  const { loading, error, success } = useSelector((state) => state.forgotPass);
 
   useEffect(() => {
     if (error) {
@@ -29,7 +26,7 @@ const ResetPassword = () => {
 
       navigate("/login");
     }
-  }, [toast, dispatch, error, navigate, success]);
+  }, [dispatch, error, navigate, success]);
 
   return (
     <>

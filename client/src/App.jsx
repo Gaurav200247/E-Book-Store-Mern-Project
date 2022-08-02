@@ -25,7 +25,7 @@ import UpdateProfile from "./Components/User/UpdateProfile.jsx";
 import { Store } from "./Store";
 
 const App = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.User);
+  const { isAuthenticated } = useSelector((state) => state.User);
 
   useEffect(() => {
     Store.dispatch(loadUser());

@@ -31,7 +31,7 @@ const UpdatePassword = () => {
 
       dispatch({ type: "UpdatePasswordReset" });
     }
-  }, [isUpdated, dispatch, toast, navigate, , error]);
+  }, [isUpdated, dispatch, navigate, error]);
 
   return (
     <div className="LoginRegisterForm">

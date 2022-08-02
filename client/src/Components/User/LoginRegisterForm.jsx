@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearErrors } from "../../Actions/UserAction";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginRegisterForm = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const LoginRegisterForm = () => {
       toast.error(error);
       dispatch(ClearErrors());
     }
-  }, [error, toast, dispatch]);
+  }, [error, dispatch]);
 
   useEffect(() => {
     if (isAuthenticated) {

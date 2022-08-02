@@ -16,13 +16,13 @@ const ForgotPassForm = () => {
       toast.error(error);
       dispatch(ClearErrors());
     }
-  }, [toast, dispatch, error]);
+  }, [dispatch, error]);
 
   useEffect(() => {
     if (message) {
       toast.success(message);
     }
-  }, [toast, dispatch, message]);
+  }, [dispatch, message]);
 
   return (
     <>

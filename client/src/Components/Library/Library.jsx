@@ -91,7 +91,7 @@ const Library = () => {
       toast.error(errors);
       dispatch(ClearErrors());
     }
-  }, [toast, errors]);
+  }, [errors, dispatch]);
 
   return (
     <>
@@ -187,7 +187,6 @@ const Library = () => {
                   <div className="filter-button-container">
                     <button
                       className="button-55 text-green-600 truncate"
-                      role="button"
                       onClick={SubmitFilters}
                     >
                       Submit Filters
@@ -195,7 +194,6 @@ const Library = () => {
 
                     <button
                       className="button-55 text-red-600 truncate"
-                      role="button"
                       onClick={() => window.location.reload()}
                     >
                       Reset Filters

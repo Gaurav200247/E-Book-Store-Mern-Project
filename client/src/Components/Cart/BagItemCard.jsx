@@ -1,5 +1,4 @@
-import e from "express";
-import React from "react";
+import React, { useState } from "react";
 
 const BagItemCard = ({ images, title, price, rentPrice }) => {
   const [Type, setType] = useState("Rent");

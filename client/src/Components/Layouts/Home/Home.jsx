@@ -4,7 +4,7 @@ import "./Home.css";
 import Back_Video from "../../../videos/backvid5.mp4";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../Loading/Loading";
-import { getAllBooks } from "../../../Actions/BookAction";
+import { getAllBooks, ClearErrors } from "../../../Actions/BookAction";
 import BookCard from "./BookCard.jsx";
 import { toast } from "react-toastify";
 
@@ -16,8 +16,9 @@ const Home = () => {
   useEffect(() => {
     if (errors) {
       toast.error(errors);
+      dispatch(ClearErrors());
     }
-  }, [toast, errors]);
+  }, [errors, dispatch]);
 
   useEffect(() => {
     dispatch(getAllBooks());

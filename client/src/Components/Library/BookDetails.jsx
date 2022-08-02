@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { getSingleBook } from "../../Actions/BookAction";
+import { getSingleBook, ClearErrors } from "../../Actions/BookAction";
 import Loading from "../Layouts/Loading/Loading";
 import "./BookDetails.css";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import Rating from "@mui/material/Rating";
@@ -13,60 +13,12 @@ import { colors } from "../../Data";
 import { AiOutlineRight } from "react-icons/ai";
 import ReviewCard from "./ReviewCard.jsx";
 import pdf from "../../videos/manga_1.pdf";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const BookDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, errors, book } = useSelector((state) => state.GetSingleBook);
-  const { isAuthenticated } = useSelector((state) => state.User);
-
-  let favList = [];
-  let mycart = [];
-  const [isLiked, setIsLiked] = useState(false);
-  const [isAdded, setIsAdded] = useState(false);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (book && book._id) {
-        if (localStorage.getItem("favList")) {
-          favList = JSON.parse(localStorage.getItem("favList"));
-
-          const found = favList.find((item) => item._id === book._id);
-
-          if (found) {
-            setIsLiked(true);
-          } else {
-            setIsLiked(false);
-          }
-        }
-      }
-    } else {
-      setIsLiked(false);
-    }
-  }, [isLiked, favList, isAuthenticated]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      if (book && book._id) {
-        if (localStorage.getItem("mycart")) {
-          mycart = JSON.parse(localStorage.getItem("mycart"));
-
-          const found = mycart.find((item) => item._id === book._id);
-
-          if (found) {
-            setIsAdded(true);
-          } else {
-            setIsAdded(false);
-          }
-        }
-      }
-    } else {
-      setIsAdded(false);
-    }
-  }, [isAdded, mycart, isAuthenticated]);
 
   // Get Book Details
   useEffect(() => {
@@ -79,67 +31,11 @@ const BookDetails = () => {
       toast.error(errors);
       dispatch(ClearErrors());
     }
-  }, [toast, errors]);
+  }, [errors, dispatch]);
 
-  const AddToFav = () => {
-    if (isAuthenticated) {
-      if (localStorage.getItem("favList")) {
-        favList = JSON.parse(localStorage.getItem("favList"));
+  const AddToFav = () => {};
 
-        const found = favList.find((item) => item._id === book._id);
-
-        if (found) {
-          let newList = favList.filter((item) => item !== found);
-          localStorage.setItem("favList", JSON.stringify(newList));
-          toast.dark("Removed from Favourites.");
-          setIsLiked(false);
-        } else {
-          favList.push(book);
-          localStorage.setItem("favList", JSON.stringify(favList));
-          toast.success("Added to Favourites.");
-          setIsLiked(true);
-        }
-      } else {
-        favList.push(book);
-        localStorage.setItem("favList", JSON.stringify(favList));
-        toast.success("Added to Favourites.");
-        setIsLiked(true);
-      }
-    } else {
-      navigate("/login");
-      toast.dark("Please Login to create your Favourite List");
-    }
-  };
-
-  const AddToBag = () => {
-    if (isAuthenticated) {
-      if (localStorage.getItem("mycart")) {
-        mycart = JSON.parse(localStorage.getItem("mycart"));
-
-        const found = mycart.find((item) => item._id === book._id);
-
-        if (found) {
-          let newList = mycart.filter((item) => item !== found);
-          localStorage.setItem("mycart", JSON.stringify(newList));
-          toast.dark("Removed from your bag");
-          setIsAdded(false);
-        } else {
-          mycart.push(book);
-          localStorage.setItem("mycart", JSON.stringify(mycart));
-          toast.success("Added to your bag.");
-          setIsAdded(true);
-        }
-      } else {
-        mycart.push(book);
-        localStorage.setItem("mycart", JSON.stringify(mycart));
-        toast.success("Added to your bag");
-        setIsAdded(true);
-      }
-    } else {
-      navigate("/login");
-      toast.dark("Please Login to create your Bag");
-    }
-  };
+  const AddToBag = () => {};
 
   return (
     <>
@@ -163,7 +59,7 @@ const BookDetails = () => {
             <div className="Book-image-container">
               <div className="fav-btn-container">
                 <button onClick={AddToFav}>
-                  {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                  <FavoriteIcon />
                 </button>
               </div>
 
@@ -221,9 +117,7 @@ const BookDetails = () => {
 
               <div className="price-container">
                 <div className="add-to-library">
-                  <button onClick={AddToBag}>
-                    {isAdded ? "Remove From My Bag" : "Add To My Bag"}
-                  </button>
+                  <button onClick={AddToBag}>Add To My Bag</button>
                 </div>
               </div>
 
@@ -289,6 +183,7 @@ const BookDetails = () => {
                 <div className="pdf-container">
                   <iframe
                     src={pdf}
+                    title="unique"
                     className="w-full"
                     width="100%"
                     height="100%"

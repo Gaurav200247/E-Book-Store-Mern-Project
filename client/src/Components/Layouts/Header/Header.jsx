@@ -36,7 +36,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", changeColor);
     };
-  }, [window]);
+  }, []);
 
   return (
     <nav>
