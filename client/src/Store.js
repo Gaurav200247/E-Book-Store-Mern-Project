@@ -3,7 +3,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   GetAllBooksReducer,
   GetSingleBooksReducer,
+  NewBookReducer,
 } from "./Reducers/BookReducer";
+import { newReviewReducer } from "./Reducers/reviewReducer";
 
 import {
   forgotPasswordReducer,
@@ -18,5 +20,8 @@ export const Store = configureStore({
     User: UserReducer,
     Profile: ProfileReducer,
     forgotPass: forgotPasswordReducer,
+    newReview: newReviewReducer,
+
+    newBook: NewBookReducer,
   },
 });

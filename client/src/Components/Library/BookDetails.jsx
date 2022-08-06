@@ -13,12 +13,21 @@ import { colors } from "../../Data";
 import { AiOutlineRight } from "react-icons/ai";
 import ReviewCard from "./ReviewCard.jsx";
 import pdf from "../../videos/manga_1.pdf";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Formik, Field, Form } from "formik";
+import { clearErrors, createReview } from "../../Actions/ReviewAction";
+
+import { Worker } from "@react-pdf-viewer/core";
+import { Viewer } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 
 const BookDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { loading, errors, book } = useSelector((state) => state.GetSingleBook);
+
+  const { error: ReviewError, review } = useSelector(
+    (state) => state.newReview
+  );
 
   // Get Book Details
   useEffect(() => {
@@ -31,11 +40,14 @@ const BookDetails = () => {
       toast.error(errors);
       dispatch(ClearErrors());
     }
-  }, [errors, dispatch]);
-
-  const AddToFav = () => {};
-
-  const AddToBag = () => {};
+    if (ReviewError) {
+      toast.error(ReviewError);
+      dispatch(clearErrors());
+    }
+    if (review) {
+      toast.success("Review Submitted SuccessFully !!");
+    }
+  }, [errors, ReviewError, dispatch, review]);
 
   return (
     <>
@@ -50,19 +62,13 @@ const BookDetails = () => {
             <Link to="/library">
               Library <AiOutlineRight />
             </Link>
-            <Link to={`/books/${book && book._id}`}>
+            <Link className="truncate" to={`/books/${book && book._id}`}>
               {book && book.title} <AiOutlineRight />
             </Link>
           </div>
 
           <div className="book-details-block">
             <div className="Book-image-container">
-              <div className="fav-btn-container">
-                <button onClick={AddToFav}>
-                  <FavoriteIcon />
-                </button>
-              </div>
-
               <div>
                 <Carousel
                   stopOnHover={true}
@@ -106,18 +112,18 @@ const BookDetails = () => {
                 <div className="price-container">
                   <h1>Price :</h1>
                   <p className="ml-3">₹ {book && book.price}</p>
+                  <div className="add-to-library">
+                    <button>Buy Now</button>
+                  </div>
                 </div>
 
                 <div className="price-container">
                   <h1>Rent :</h1>
                   <p className="ml-3 line-through">₹ {book && book.price}</p>
                   <p className="ml-3">₹ {book && book.rentPrice} for 7 days</p>
-                </div>
-              </div>
-
-              <div className="price-container">
-                <div className="add-to-library">
-                  <button onClick={AddToBag}>Add To My Bag</button>
+                  <div className="add-to-library">
+                    <button>Rent Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -126,8 +132,8 @@ const BookDetails = () => {
                   <h1>Author :</h1>
                   <ul>
                     {book &&
-                      book.authors.map((item) => {
-                        return <li key={item._id}>{item.name}</li>;
+                      book.authors.map((item, index) => {
+                        return <li key={index}>{item}</li>;
                       })}
                   </ul>
                 </div>
@@ -165,7 +171,7 @@ const BookDetails = () => {
                 </div>
 
                 <div>
-                  <h1>Synopsis :</h1>
+                  <h1 className="truncate">Synopsis :</h1>
                   <p>{book && book.synopsis}</p>
                 </div>
               </div>
@@ -174,50 +180,93 @@ const BookDetails = () => {
             </div>
           </div>
 
-          <div className="preview-review-block">
-            <div className="pdf-preview-block">
-              <h1 id="homeHeading" className="truncate">
-                PDF Preview
-              </h1>
-              {book && book.pdfs && book.pdfs.previewPdf ? (
+          <div className="pdf-preview-block">
+            <h1 id="homeHeading" className="truncate">
+              PDF Preview
+            </h1>
+            {book && book.original_PDF ? (
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
                 <div className="pdf-container">
-                  <iframe
-                    src={pdf}
-                    title="unique"
-                    className="w-full"
-                    width="100%"
-                    height="100%"
-                    frameborder="0"
-                  ></iframe>
+                  <Viewer fileUrl={book.original_PDF.url} className="w-10/12" />
                 </div>
-              ) : (
-                <h1 className="no-reviews-yet">Preview Not Available</h1>
-              )}
+              </Worker>
+            ) : (
+              <h1 className="no-reviews-yet">Preview Not Available</h1>
+            )}
 
-              <div className="add-to-library-2">
-                <a href="#up">Buy / Rent</a>
-              </div>
+            <div className="add-to-library-2">
+              <a href="#up">Buy / Rent</a>
             </div>
+          </div>
 
-            <div className="reviews-block">
-              <h1 id="reviewHeading" className="truncate">
-                Reviews
-              </h1>
-              <div className="reviews-container">
-                {book && book.reviews.length > 0 ? (
-                  book.reviews.map((item, index) => {
-                    return <ReviewCard {...item} key={index} />;
-                  })
-                ) : (
-                  <h1 className="no-reviews-yet">
-                    No Reviews Yet
-                    <br />
-                    <br />
-                    <br />
-                    Be The First To Review !!
-                  </h1>
-                )}
+          <div className="reviews-block">
+            <h1 id="reviewHeading" className="truncate">
+              Reviews
+            </h1>
+            <div className="reviews-container">
+              <div className="review-form-container ">
+                <Formik
+                  initialValues={{ rating: 0, comment: "" }}
+                  onSubmit={(values) => {
+                    const myForm = new FormData();
+
+                    // ratings, comment, productID
+
+                    myForm.set("ratings", values.rating);
+                    myForm.set("comment", values.comment);
+                    myForm.set("bookId", book._id);
+
+                    dispatch(createReview(myForm));
+                  }}
+                >
+                  {({ values, setFieldValue }) => (
+                    <Form className="m-3">
+                      <h1>Give This Book A Review !</h1>
+
+                      <Rating
+                        className="mb-3"
+                        precision={0.5}
+                        name="rating"
+                        onChange={(event) => {
+                          setFieldValue("rating", event.target.value);
+                        }}
+                      />
+
+                      <Field
+                        cols="60"
+                        rows="3"
+                        placeholder="Enter Your Review Here"
+                        className="p-3"
+                        name="comment"
+                        size={window.innerWidth < 900 ? "small" : "medium"}
+                      />
+
+                      <div className="w-full flex justify-end items-center">
+                        <button
+                          type="submit"
+                          className="btn w-1/3 text-white bg-sky-600"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
               </div>
+
+              {book && book.reviews.length > 0 ? (
+                book.reviews.map((item, index) => {
+                  return <ReviewCard {...item} key={index} />;
+                })
+              ) : (
+                <h1 className="no-reviews-yet">
+                  No Reviews Yet
+                  <br />
+                  <br />
+                  <br />
+                  Be The First To Review !!
+                </h1>
+              )}
             </div>
           </div>
         </div>

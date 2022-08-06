@@ -31,7 +31,7 @@ const BookCard = ({ _id, images, title, rating, price }) => {
           size={window.innerWidth < 900 ? "small" : "medium"}
         />
       </div>
-      <button className="add-btn truncate">Add To My Library</button>
+      <button className="add-btn truncate">Add To My Wishlist</button>
     </div>
   );
 };

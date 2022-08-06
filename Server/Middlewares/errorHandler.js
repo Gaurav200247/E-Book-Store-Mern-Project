@@ -3,7 +3,7 @@ const { StatusCodes } = require("http-status-codes");
 const errHandlerMiddleware = (err, req, res, next) => {
   const customError = {
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
-    msg: err.message || "Something went wrong !!, Please try again later.",
+    msg: err.message || "Something Went Wrong, Please Try Again Later !!",
   };
 
   // if email entered is not unique for registeration

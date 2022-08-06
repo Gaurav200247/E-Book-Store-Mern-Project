@@ -1,6 +1,7 @@
 const Book = require("../Models/BookModel");
 const { StatusCodes } = require("http-status-codes");
 const CustomAPIerror = require("../Errors/Custom-error");
+const cloudinary = require("cloudinary").v2;
 
 // --------------------------------------- Get All books ---------------------------------------
 const getAllBooks = async (req, res) => {
@@ -59,6 +60,30 @@ const getAllBooks = async (req, res) => {
 
 // --------------------------------------- Create a book ---------------------------------------
 const createBook = async (req, res) => {
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  let imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.uploader.upload(images[i], {
+      folder: "Ecommerce App Products Pics",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
+
   const book = await Book.create(req.body);
 
   book.rentPrice = 0.4 * book.price;

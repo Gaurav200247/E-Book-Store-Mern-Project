@@ -102,7 +102,7 @@ const Library = () => {
           <div className="library-container">
             <div>
               <h1 id="homeHeading" className="truncate">
-                All Books x Mangas
+                Welcome To Our Library
               </h1>
               <div className="filter-btn-container">
                 <button onClick={() => setfilterBox(!filterBox)}>

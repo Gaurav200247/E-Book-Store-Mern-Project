@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
-
+import ProfileIcon from "../../Images/Profile.png";
 import "./ReviewCard.css";
 
 const ReviewCard = ({ name, comment, ratings, avatar }) => {
@@ -16,10 +16,7 @@ const ReviewCard = ({ name, comment, ratings, avatar }) => {
   return (
     <div className="review-card">
       <div>
-        <img
-          src="https://raw.githubusercontent.com/Gaurav200247/E-Commerce-MERN-App/master/frontend/src/Components/Images/Profile.png"
-          alt="User"
-        />
+        <img src={ProfileIcon} alt="User" />
         <p>{name}</p>
       </div>
 

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { logOutUser } from "../../Actions/UserAction";
 import Loading from "../Layouts/Loading/Loading";
 import { Link, useNavigate } from "react-router-dom";
+import ProfileIcon from "../../Images/Profile.png";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Profile = () => {
             src={
               user &&
               (user.avatar.url === "This is Sample url"
-                ? "https://raw.githubusercontent.com/Gaurav200247/E-Commerce-MERN-App/master/frontend/src/Components/Images/Profile.png"
+                ? ProfileIcon
                 : user.avatar.url)
             }
             alt={user && user.name}

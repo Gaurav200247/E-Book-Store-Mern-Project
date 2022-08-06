@@ -12,10 +12,9 @@ const BookSchema = new mongoose.Schema(
       required: [true, "please provide price"],
     },
     rentPrice: {
-      type: Number, //will be added automatically as per books price 60% off
+      type: Number,
     },
     type: {
-      // manga,novel,study,biography
       type: String,
       required: [true, "please provide type"],
       trim: true,
@@ -37,22 +36,18 @@ const BookSchema = new mongoose.Schema(
       required: [true, "please provide synopsis"],
     },
     featured: { type: String, default: "false" },
-    authors: [
-      // in array form
-      {
-        name: { type: String, required: true },
-      },
-    ],
-    genres: [{ type: String, required: true }], // in array form
+
+    authors: [{ type: String, required: true }],
+
+    genres: [{ type: String, required: true }],
+
     images: [
-      // in array form
       {
         public_id: { type: String, required: true },
         url: { type: String, required: true },
       },
     ],
     reviews: [
-      // in array form
       {
         user: {
           type: mongoose.Schema.ObjectId,
@@ -73,16 +68,12 @@ const BookSchema = new mongoose.Schema(
         },
       },
     ],
-    pdfs: {
-      preview_PDF: {
-        public_id: { type: String, required: true },
-        url: { type: String, required: true },
-      },
-      original_PDF: {
-        public_id: { type: String, required: true },
-        url: { type: String, required: true },
-      },
-    },
+    // original_PDF: [
+    //   {
+    //     public_id: { type: String, required: true },
+    //     url: { type: String, required: true },
+    //   },
+    // ],
   },
   { timestamps: true }
 );

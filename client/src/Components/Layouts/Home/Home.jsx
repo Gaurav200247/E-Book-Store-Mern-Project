@@ -49,7 +49,7 @@ const Home = () => {
           </div>
 
           <h1 id="homeHeading" className="truncate">
-            Featured Books x Mangas
+            Featured Books
           </h1>
 
           <div className={`${books && books.books.length > 0 && "container"}`}>

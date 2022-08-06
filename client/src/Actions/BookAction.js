@@ -32,7 +32,26 @@ export const getSingleBook = (id) => async (dispatch) => {
 
     dispatch({ type: "GetSingleBooksSuccess", payload: data });
   } catch (error) {
-    dispatch({ type: "GetSingleBooksFail" });
+    dispatch({ type: "GetSingleBooksFail", payload: error.response.data.msg });
+  }
+};
+
+export const createNewBook = (newBookData) => async (dispatch) => {
+  // console.log(newBookData);
+  try {
+    dispatch({ type: "NewBookRequest" });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(`/api/v1/books`, newBookData, config);
+
+    dispatch({ type: "NewBookSuccess", payload: data });
+  } catch (error) {
+    dispatch({ type: "NewBookFail", payload: error.response.data.msg });
   }
 };
 

@@ -39,3 +39,27 @@ export const GetSingleBooksReducer = createReducer(
     },
   }
 );
+export const NewBookReducer = createReducer(
+  {},
+  {
+    NewBookRequest: (state) => {
+      state.loading = true;
+    },
+    NewBookSuccess: (state, action) => {
+      state.loading = false;
+      state.success = action.payload.success;
+      state.book = action.payload.book;
+    },
+    NewBookFail: (state, action) => {
+      state.loading = false;
+      state.RequestError = action.payload;
+    },
+    NewBookReset: (state, action) => {
+      state.success = false;
+    },
+
+    ClearErrors: (state) => {
+      state.RequestError = null;
+    },
+  }
+);

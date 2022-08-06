@@ -1,0 +1,195 @@
+.Dashboard {
+  margin-top: 6vmax;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.speedDialIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  object-fit: contain;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.admin-info-block {
+  width: 100%;
+}
+.horizontal-info-block {
+  margin: 1vmax;
+  width: 95%;
+  height: 25vh;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.horizontal-info-block > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 30%;
+  height: 100%;
+  justify-content: space-between;
+  background-color: white;
+  position: relative;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 8px;
+  padding: 1vmax;
+}
+
+.horizontal-info-block > div > span:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 1.5vmax;
+}
+
+.horizontal-info-block > div > span {
+  font-size: 2.5vmax;
+}
+
+.horizontal-info-block > div > a {
+  font-size: 1vmax;
+  border-bottom: 1px solid #000;
+}
+.svg-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.7vmax;
+  background-color: whitesmoke;
+  color: black;
+  padding: 0.7vmax;
+  border-radius: 7px;
+}
+.admin-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.long-inp {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1vmax;
+  margin: 0.5vmax;
+  background-color: white;
+  border: 1px solid gray;
+}
+.long-inp > textarea,
+.form-input > select {
+  background-color: white;
+  color: black;
+  width: 80%;
+  outline: none;
+  border: 1px solid grey;
+  padding: 0.5vmax;
+  font-size: 1vmax;
+}
+.filter-4 > h1 {
+  font-size: 1.3vmax;
+  font-weight: bold;
+  padding: 0.5vmax;
+}
+.admin-form-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin-top: 1vmax;
+}
+.admin-form-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-form-inner > div:first-child {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.right,
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  padding: 2vmax;
+}
+.left {
+  border-left: 1px solid #000;
+}
+.authors-preview-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.authors-preview-box > h1 {
+  font-size: 1.3vmax;
+  font-weight: bold;
+  padding: 0.5vmax;
+}
+.authors-preview-box > ul {
+  width: 80%;
+}
+.authors-preview-box > ul > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 15px;
+  padding: 0.5vmax;
+  font-size: 1.2vmax;
+  transition: 0.2s all ease;
+}
+.authors-preview-box > ul > li:hover {
+  background-color: rgba(44, 44, 44);
+  color: white;
+}
+.avatar-preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.avatar-preview-container > div {
+  position: relative;
+  width: 70%;
+}
+.avatar-preview-container > div > button {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  color: red;
+  background-color: lightsalmon;
+  padding: 0.5vmax;
+  border-radius: 4px;
+  border: 1px solid black;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  transition: 0.3s all ease;
+}
+.avatar-preview-container > div > button:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.avatar-preview-container > div > img {
+  margin: 0.5vmax;
+  width: 100%;
+  object-fit: contain;
+}
+.admin-pdf-container {
+  width: 80%;
+  height: 70vh;
+}
